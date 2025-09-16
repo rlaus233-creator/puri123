@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PURIX - Unified Exchange</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/puri-favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/puri-favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at 50% 120%, rgba(106, 17, 203, 0.2) 0%, transparent 50%), #0d1117;
+            animation: pulse-bg 15s infinite alternate;
+        }
+
+        @keyframes pulse-bg {
+            from {
+                background-color: #0d1117;
+            }
+
+            to {
+                background-color: #0b0e12;
+            }
+        }
+
+        .bg-gradient-custom {
+            background-image: linear-gradient(135deg, #1f2733 0%, #0d1117 100%);
+        }
+
+        .section-card {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .typing-text::after {
+            content: '|';
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                color: transparent
+            }
+
+            50% {
+                color: white
+            }
+        }
+
+        /* Fade-in animation on scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-section .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .fade-in-section .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .fade-in-section .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .fade-in-section .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        .fade-in-section .delay-5 {
+            transition-delay: 0.5s;
+        }
+
+        .go-to-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background-color: transparent;
+            /* Changed to transparent */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: scale(0.9);
+            z-index: 50;
+        }
+
+        .go-to-top-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .go-to-top-btn.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-switcher-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: #c9d1d9;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .language-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            min-width: 120px;
+            background-color: #1f2733;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            z-index: 100;
+        }
+
+        .language-menu a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: #c9d1d9;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s;
+        }
+
+        .language-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <header class="py-6 px-4 md:px-8 flex justify-between items-center z-20 relative">
+        <div class="flex items-center space-x-4">
+            <span class="text-2xl font-bold gradient-text">PURIX</span>
+        </div>
+        <div class="language-switcher">
+            <details class="relative">
+                <summary class="language-switcher-btn outline-none">
+                    <i class="fas fa-globe mr-2"></i>
+                    <span id="current-lang-text">EN</span>
+                    <i class="fas fa-chevron-down ml-2 text-xs transition-transform duration-200"></i>
+                </summary>
+                <div class="language-menu">
+                    <a href="#" data-lang="en">English (EN)</a>
+                    <a href="#" data-lang="ko">한국어 (KO)</a>
+                    <a href="#" data-lang="ja">日本語 (JA)</a>
+                    <a href="#" data-lang="zh">中文 (ZH)</a>
+                    <a href="#" data-lang="es">Español (ES)</a>
+                    <a href="#" data-lang="fr">Français (FR)</a>
+                    <a href="#" data-lang="de">Deutsch (DE)</a>
+                </div>
+            </details>
+        </div>
+    </header>
+
+    <main class="relative z-10 px-6 md:px-12 py-12 md:py-24">
+        <!-- Hero Section -->
+        <section class="hero-bg flex flex-col items-center text-center py-20 md:py-32 rounded-[2rem] shadow-2xl mb-24">
+            <h1 class="max-w-4xl mx-auto font-extrabold tracking-tight gradient-text
+           text-[clamp(2rem,6vw,4.5rem)] leading-snug mb-6">
+                <span id="typing-slogan" data-i18n="hero_slogan"></span>
+            </h1>
+
+            <p class="text-gray-400 font-light max-w-3xl mx-auto mb-10
+           text-[clamp(1rem,2.2vw,1.5rem)]" data-i18n="hero_subcopy">
+                지갑만 연결하면 시작되는 우주적 거래 경험
+            </p>
+
+            <div class="mt-4 flex justify-center w-full px-4">
+                <!-- GIF처럼 무한재생되는 Hero 비디오 -->
+                <video autoplay loop muted playsinline poster="./images/puri-visual-fallback.png"
+                    class="rounded-xl shadow-lg w-full max-w-3xl h-[44vh] md:h-[420px] object-cover">
+                    <source src="./videos/puri-visual-optimized.mp4" type="video/mp4">
+                    <source src="./videos/puri-visual-optimized.webm" type="video/webm">
+                    브라우저가 동영상을 지원하지 않습니다.
+                </video>
+            </div>
+        </section>
+
+
+
+        <!-- Linktree Section -->
+        <section class="mb-24 text-center fade-in-section">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12 gradient-text" data-i18n="linktree_title">
+                PURIX의 우주를 탐험하세요
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- Twitter Card -->
+                <a href="https://x.com/puriop8" target="_blank"
+                    class="section-card p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center">
+                        <i class="fab fa-twitter text-6xl text-blue-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-1">Twitter</h3>
+                        <p class="text-gray-400 text-center" data-i18n="linktree_twitter_desc">최신 소식과 정보를 받아보세요.</p>
+                    </div>
+                </a>
+                <!-- Telegram Card -->
+                <a href="https://t.me/puriOfficial" target="_blank"
+                    class="section-card p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center">
+                        <i class="fab fa-telegram-plane text-6xl text-cyan-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-1">Telegram</h3>
+                        <p class="text-gray-400 text-center" data-i18n="linktree_telegram_desc">커뮤니티에 참여하여 함께 소통하세요.</p>
+                    </div>
+                </a>
+                <!-- YouTube Card -->
+                <a href="https://www.youtube.com/@puriop8" target="_blank"
+                    class="section-card p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center">
+                        <i class="fab fa-youtube text-6xl text-red-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-1">YouTube</h3>
+                        <p class="text-gray-400 text-center" data-i18n="linktree_youtube_desc">다양한 영상 콘텐츠를 확인하세요.</p>
+                    </div>
+                </a>
+                <!-- Pump.fun Card -->
+                <a href="https://pump.fun/coin/8koTjoo4AX8Zpiq1etzGHaRqF7nZeQW68YPwrcH4pump" target="_blank"
+                    class="section-card p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <div class="flex flex-col items-center">
+                        <i class="fa-solid fa-coins text-6xl text-amber-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white mb-1">Pump.fun</h3>
+                        <p class="text-gray-400 text-center" data-i18n="linktree_pump_desc">PURI를 직접 구매하고 거래하세요.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="mb-24 fade-in-section">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12 gradient-text" data-i18n="features_title">
+                CEX처럼 빠르게, DEX처럼 안전하게
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <i class="fa-solid fa-wallet text-6xl text-purple-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-i18n="feature_non_custodial_title">Non-Custodial
+                    </h3>
+                    <p class="text-gray-400" data-i18n="feature_non_custodial_text">
+                        자산은 항상 당신의 지갑에 보관되어 온전한 소유권을 가집니다.
+                    </p>
+                </div>
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <i class="fa-solid fa-fingerprint text-6xl text-blue-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-i18n="feature_kyc_title">No KYC</h3>
+                    <p class="text-gray-400" data-i18n="feature_kyc_text">
+                        번거로운 가입 절차나 개인 정보 인증이 필요 없습니다.
+                    </p>
+                </div>
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <i class="fa-solid fa-cubes text-6xl text-cyan-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-i18n="feature_hybrid_title">하이브리드 유동성</h3>
+                    <p class="text-gray-400" data-i18n="feature_hybrid_text">
+                        CEX 오더북과 DEX 풀의 유동성을 통합 매칭하여 최적의 거래를 제공합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Section -->
+        <section id="security" class="mb-24 fade-in-section">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12 gradient-text" data-i18n="security_title">
+                당신의 자산은 오직 당신의 것
+            </h2>
+            <div class="bg-gradient-custom rounded-3xl p-8 md:p-12 shadow-xl">
+                <ul class="list-disc list-inside text-gray-400 space-y-4">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-lock text-white mr-4 mt-1"></i>
+                        <span data-i18n="security_point_1">중앙 보관 없음 – 해킹 리스크 최소화</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-file-contract text-white mr-4 mt-1"></i>
+                        <span data-i18n="security_point_2">스마트 컨트랙트 기반 투명한 거래</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-user-shield text-white mr-4 mt-1"></i>
+                        <span data-i18n="security_point_3">글로벌 AML 모듈 탑재 – 안전한 환경 유지</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Community & Token Section -->
+        <section id="community" class="mb-24 fade-in-section">
+            <div class="bg-gradient-custom rounded-3xl p-8 md:p-12 shadow-xl">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-8 gradient-text"
+                    data-i18n="community_title">
+                    투명성 위에 세운 통합 거래소
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-gray-400 mb-4" data-i18n="community_desc">
+                            펌프펀에서 100% 유통된 $PURI, 팀 물량 없이 모두가 같은 출발선. PURIX는 CEX와 DEX 결합과 PURI Hyper Index 그리고 커뮤니티의 힘으로
+                            성장합니다.
+                        </p>
+                        <h3 class="text-2xl font-bold text-white mb-2" data-i18n="token_benefits_title">$PURI 토큰 혜택</h3>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li data-i18n="token_benefit_1">$PURI 토큰 보유자 전용 거래 수수료 할인</li>
+                            <li data-i18n="token_benefit_2">지구인 미션 참여 시 에어드랍 보상</li>
+                            <li data-i18n="token_benefit_3">스테이킹 시 추가 리워드 및 런치패드 우선 참여</li>
+                            <li data-i18n="token_benefit_4">거래소 수익 일부로 매입·소각</li>
+                        </ul>
+                    </div>
+                    <video autoplay loop muted playsinline class="w-full rounded-xl shadow-lg">
+                        <source src="./videos/community-visual.mp4" type="video/mp4">
+                        브라우저가 video 태그를 지원하지 않습니다.
+                    </video>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="mb-24 fade-in-section">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12 gradient-text" data-i18n="roadmap_title">
+                PURIX 로드맵
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <!-- Phase 1: Completed -->
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="roadmap_phase0_title">✅ 2025년 2월 (완료)</h3>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2">
+                        <li data-i18n="roadmap_phase0_item1">전담 팀 구성 완료</li>
+                        <li data-i18n="roadmap_phase0_item2">CEX + DEX 하이브리드 거래소 개발 본격 착수</li>
+                    </ul>
+                </div>
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="roadmap_phase0_title2">✅ 2025년 8월 (완료)
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2">
+                        <li data-i18n="roadmap_phase0_item3">밈 캐릭터 푸리(PURI) 공식 출시</li>
+                        <li data-i18n="roadmap_phase0_item4">저작권 등록 완료된 IP 기반 프로젝트 전개</li>
+                    </ul>
+                </div>
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="roadmap_phase1_title">✅ 2025년 9월 (완료)</h3>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2">
+                        <li data-i18n="roadmap_phase1_item1">$PURI 펌프펀 출시 (100% 유통, 커뮤니티 중심 발행)</li>
+                        <li data-i18n="roadmap_phase1_item2">자사주 매입을 통한 상금 풀(Fund Pool) 마련 → 커뮤니티 이벤트·미션 보상 재원 확보</li>
+                        <li data-i18n="roadmap_phase1_item3">커뮤니티 구축 시작: 텔레그램/트위터 확장, 밈 콘테스트, 지구인 미션 v1 진행</li>
+                    </ul>
+                </div>
+                <!-- Phase 2: Q4 2025 -->
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="roadmap_phase2_title">🔜 2025년 4분기
+                        (10~12월)</h3>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2">
+                        <li data-i18n="roadmap_phase2_sub_title1"><b>토큰 유틸리티 준비</b></li>
+                        <ul class="list-disc list-inside ml-4">
+                            <li data-i18n="roadmap_phase2_item1">스테이킹/락업 보상 시스템 설계</li>
+                            <li data-i18n="roadmap_phase2_item2">거래소 수익 기반 매입·소각 메커니즘 확정</li>
+                        </ul>
+                        <li data-i18n="roadmap_phase2_sub_title2"><b>커뮤니티 생태계 강화</b></li>
+                        <ul class="list-disc list-inside ml-4">
+                            <li data-i18n="roadmap_phase2_item3">지구인 미션 시즌2</li>
+                            <li data-i18n="roadmap_phase2_item4">$PURI 홀더 전용 이벤트 & 에어드랍</li>
+                        </ul>
+                        <li data-i18n="roadmap_phase2_sub_title3"><b>브랜딩/웹사이트</b></li>
+                        <ul class="list-disc list-inside ml-4">
+                            <li data-i18n="roadmap_phase2_item5">PURIX 랜딩페이지 & 브랜드 아이덴티티 확립</li>
+                            <li data-i18n="roadmap_phase2_item6">초기 파트너십/유동성 풀 테스트</li>
+                        </ul>
+                    </ul>
+                </div>
+                <!-- Phase 3: Q1 2026 -->
+                <div class="section-card p-8 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105">
+                    <h3 class="text-2xl font-bold text-white mb-4" data-i18n="roadmap_phase3_title">🚀 2026년 1분기 (1~3월)
+                    </h3>
+                    <p class="mb-4 text-gray-400" data-i18n="roadmap_phase3_subtitle"><b>PURIX 거래소 베타 출시</b></p>
+                    <ul class="list-disc list-inside text-gray-400 space-y-2">
+                        <li data-i18n="roadmap_phase3_sub_title1"><b>거래소 런칭 (Beta)</b></li>
+                        <ul class="list-disc list-inside ml-4">
+                            <li data-i18n="roadmap_phase3_item1">Non-custodial 하이브리드 거래소 공개</li>
+                            <li data-i18n="roadmap_phase3_item2">지갑 연결 기반 거래 시작</li>
+                        </ul>
+                        <li data-i18n="roadmap_phase3_sub_title2"><b>$PURI 토큰 유틸리티 적용</b></li>
+                        <ul class="list-disc list-inside ml-4">
+                            <li data-i18n="roadmap_phase3_item3">보유자 전용 수수료 할인</li>
+                            <li data-i18n="roadmap_phase3_item4">스테이킹 리워드 & 런치패드 우선 참여권</li>
+                            <li data-i18n="roadmap_phase3_item5">수익 기반 매입·소각 시작</li>
+                        </ul>
+                        <li data-i18n="roadmap_phase3_sub_title3"><b>커뮤니티 확장</b></li>
+                        <ul class="list-disc list-inside ml-4">
+                            <li data-i18n="roadmap_phase3_item6">글로벌 밈 캠페인 + PURIX 거래 챌린지</li>
+                            <li data-i18n="roadmap_phase3_item7">신규 지구인 미션 → 거래소와 직접 연계</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section (Onboarding) -->
+        <section id="onboarding" class="mb-24 text-center fade-in-section">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12 gradient-text"
+                data-i18n="onboarding_title">
+                3단계로 시작하세요
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Step 1 Card -->
+                <div
+                    class="section-card p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 delay-1">
+                    <div
+                        class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-blue-600 text-4xl text-white mb-4">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-i18n="onboarding_step1_title">1. 지갑 연결</h3>
+                    <p class="text-gray-400" data-i18n="onboarding_step1_text">
+                        MetaMask, Phantom 등 지원하는 지갑을 연결하세요.
+                    </p>
+                </div>
+                <!-- Step 2 Card -->
+                <div
+                    class="section-card p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 delay-2">
+                    <div
+                        class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-purple-600 text-4xl text-white mb-4">
+                        <i class="fa-solid fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-i18n="onboarding_step2_title">2. 거래 쌍 선택</h3>
+                    <p class="text-400" data-i18n="onboarding_step2_text">
+                        원하는 코인 거래 쌍을 검색하고 선택하세요.
+                    </p>
+                </div>
+                <!-- Step 3 Card -->
+                <div
+                    class="section-card p-8 rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 delay-3">
+                    <div
+                        class="w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-green-600 text-4xl text-white mb-4">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-i18n="onboarding_step3_title">3. 원클릭 체결</h3>
+                    <p class="text-gray-400" data-i18n="onboarding_step3_text">
+                        거래가 즉시 체결되고 자산은 곧바로 당신의 지갑으로 전송됩니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-12 md:py-16">
+            <p class="text-gray-500 max-w-2xl mx-auto mb-8 text-xl" data-i18n="footer_slogan">
+                PURIX – 지갑만 연결하면 우주급 거래가 시작됩니다
+            </p>
+            <div class="flex justify-center space-x-6 text-sm md:text-lg text-gray-500">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+
+                <a href="puri_whitepaper_en_default.html" class="hover:text-white transition-colors">Whitepaper</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+            <div class="mt-8 flex justify-center">
+                <a href="mailto:puriop8@gmail.com?subject=PURIX%20Inquiry&body=Hello%20PURI%20Labs%2C%0D%0A%0D%0AName%3A%20%0D%0AEmail%3A%20%0D%0AQuestion%3A%20%0D%0A"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-colors transform hover:scale-105"
+                    data-i18n="btn_contact_us">문의하기</a>
+
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="go-to-top-btn">
+        <img src="./images/puri-icon.png" alt="Go to top" class="rounded-full">
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const translations = {
+                en: {
+                    hero_slogan: "One Exchange. One Universe.",
+                    hero_subcopy: "An interstellar trading experience begins with just a wallet connection.",
+                    linktree_title: "Explore the PURIX Universe",
+                    linktree_twitter_desc: "Get the latest news and updates.",
+                    linktree_telegram_desc: "Join the community and connect with others.",
+                    linktree_youtube_desc: "Discover more through videos.",
+                    linktree_pump_desc: "Buy and trade PURI directly.",
+                    features_title: "As fast as CEX, as secure as DEX",
+                    feature_non_custodial_title: "Non-Custodial",
+                    feature_non_custodial_text: "Assets always remain in your wallet, giving you complete ownership.",
+                    feature_kyc_title: "No KYC",
+                    feature_kyc_text: "No complicated registration or personal verification required.",
+                    feature_hybrid_title: "Hybrid Liquidity",
+                    feature_hybrid_text: "Integrates CEX order books and DEX pools to deliver optimal trades.",
+                    security_title: "Your assets belong only to you",
+                    security_point_1: "No central custody – minimizing hacking risks",
+                    security_point_2: "Transparent trading powered by smart contracts",
+                    security_point_3: "Built-in global AML modules for a safe environment",
+                    community_title: "A Unified Exchange Built on Transparency",
+                    community_desc: "100% of $PURI distributed via PumpFun, no team allocation — everyone starts equally. PURIX grows with the convenience of CEX, the freedom of DEX, the PURI Hyper Index, and the power of its community.",
+                    token_benefits_title: "$PURI Token Benefits",
+                    token_benefit_1: "Exclusive trading fee discounts for $PURI holders",
+                    token_benefit_2: "Airdrop rewards for participating in Earthlings Missions",
+                    token_benefit_3: "Extra rewards and priority launchpad access through staking",
+                    token_benefit_4: "Buy-back and burn funded by exchange revenue",
+                    btn_learn_token: "Learn about $PURI",
+                    btn_join_community: "Join the Community",
+                    roadmap_title: "PURIX Roadmap",
+                    roadmap_phase0_title: "✅ February 2025 (Completed)",
+                    roadmap_phase0_item1: "Dedicated team formation completed",
+                    roadmap_phase0_item2: "Full-scale development of Unified Exchange combining CEX + DEX + PURI Hyper Index",
+                    roadmap_phase0_title2: "✅ August 2025 (Completed)",
+                    roadmap_phase0_item3: "Official launch of PURI meme character",
+                    roadmap_phase0_item4: "Project expansion based on copyright-registered IP",
+                    roadmap_phase1_title: "✅ September 2025 (Completed)",
+                    roadmap_phase1_item1: "Sep 10: $PURI launched on PumpFun (100% circulating, community-driven issuance)",
+                    roadmap_phase1_item2: "Fund pool secured through treasury buybacks → resources for community events & missions",
+                    roadmap_phase1_item3: "Community building began: Telegram/Twitter growth, meme contests, Earthlings Mission v1",
+                    roadmap_phase2_title: "🔜 Q4 2025 (Oct–Dec)",
+                    roadmap_phase2_sub_title1: "Token Utility Preparation",
+                    roadmap_phase2_item1: "Design staking/lockup reward system",
+                    roadmap_phase2_item2: "Finalize buy-back & burn mechanism from exchange revenue",
+                    roadmap_phase2_sub_title2: "Community Ecosystem Expansion",
+                    roadmap_phase2_item3: "Earthlings Mission Season 2",
+                    roadmap_phase2_item4: "Exclusive events & airdrops for $PURI holders",
+                    roadmap_phase2_sub_title3: "Branding / Website",
+                    roadmap_phase2_item5: "Establish PURIX landing page & brand identity",
+                    roadmap_phase2_item6: "Test initial partnerships/liquidity pools",
+                    roadmap_phase3_title: "🚀 Q1 2026 (Jan–Mar)",
+                    roadmap_phase3_subtitle: "PURIX Exchange Beta Launch",
+                    roadmap_phase3_sub_title1: "Exchange Launch (Beta)",
+                    roadmap_phase3_item1: "Release of non-custodial Unified Exchange",
+                    roadmap_phase3_item2: "Wallet-based trading goes live",
+                    roadmap_phase3_sub_title2: "$PURI Token Utility Integration",
+                    roadmap_phase3_item3: "Fee discounts for holders",
+                    roadmap_phase3_item4: "Staking rewards & priority launchpad access",
+                    roadmap_phase3_item5: "Begin revenue-funded buy-back & burn",
+                    roadmap_phase3_sub_title3: "Community Expansion",
+                    roadmap_phase3_item6: "Global meme campaign + PURIX trading challenge",
+                    roadmap_phase3_item7: "New Earthlings Missions linked directly to the exchange",
+                    onboarding_title: "Start in 3 Steps",
+                    onboarding_step1_title: "1. Connect Wallet",
+                    onboarding_step1_text: "Connect supported wallets like MetaMask or Phantom.",
+                    onboarding_step2_title: "2. Choose Trading Pair",
+                    onboarding_step2_text: "Search and select your desired trading pair.",
+                    onboarding_step3_title: "3. One-Click Execution",
+                    onboarding_step3_text: "Trades execute instantly and assets are sent directly to your wallet.",
+                    footer_slogan: "PURIX – Connect your wallet and start trading at cosmic scale",
+                    btn_contact_us: "Contact Us"
+                },
+
+                ko: {
+                    hero_slogan: "하나의 거래소. 하나의 우주.",
+                    hero_subcopy: "지갑만 연결하면 시작되는 우주적 거래 경험",
+                    linktree_title: "PURIX의 우주를 탐험하세요",
+                    linktree_twitter_desc: "최신 소식과 정보를 받아보세요.",
+                    linktree_telegram_desc: "커뮤니티에 참여하여 함께 소통하세요.",
+                    linktree_youtube_desc: "다양한 영상 콘텐츠를 확인하세요.",
+                    linktree_pump_desc: "PURI를 직접 구매하고 거래하세요.",
+                    features_title: "CEX처럼 빠르게, DEX처럼 안전하게",
+                    feature_non_custodial_title: "Non-Custodial",
+                    feature_non_custodial_text: "자산은 항상 당신의 지갑에 보관되어 온전한 소유권을 가집니다.",
+                    feature_kyc_title: "No KYC",
+                    feature_kyc_text: "번거로운 가입 절차나 개인 정보 인증이 필요 없습니다.",
+                    feature_hybrid_title: "하이브리드 유동성",
+                    feature_hybrid_text: "CEX 오더북과 DEX 풀의 유동성을 통합 매칭하여 최적의 거래를 제공합니다.",
+                    security_title: "당신의 자산은 오직 당신의 것",
+                    security_point_1: "중앙 보관 없음 – 해킹 리스크 최소화",
+                    security_point_2: "스마트 컨트랙트 기반 투명한 거래",
+                    security_point_3: "글로벌 AML 모듈 탑재 – 안전한 환경 유지",
+                    community_title: "투명성 위에 세운 하이브리드 거래소",
+                    community_desc: "펌프펀에서 100% 유통된 $PURI, 팀 물량 없이 모두가 같은 출발선. PURIX는 CEX와 DEX 결합과 PURI Hyper Index 그리고 커뮤니티의 힘으로 성장합니다.",
+                    token_benefits_title: "$PURI 토큰 혜택",
+                    token_benefit_1: "$PURI 토큰 보유자 전용 거래 수수료 할인",
+                    token_benefit_2: "지구인 미션 참여 시 에어드랍 보상",
+                    token_benefit_3: "스테이킹 시 추가 리워드 및 런치패드 우선 참여",
+                    token_benefit_4: "거래소 수익 일부로 매입·소각",
+                    btn_learn_token: "PURI 토큰 알아보기",
+                    btn_join_community: "커뮤니티 참여하기",
+                    roadmap_title: "PURIX 로드맵",
+                    roadmap_phase0_title: "✅ 2025년 2월 (완료)",
+                    roadmap_phase0_item1: "전담 팀 구성 완료",
+                    roadmap_phase0_item2: "CEX + DEX + PURI Hyper Index 거래소 개발 본격 착수",
+                    roadmap_phase0_title2: "✅ 2025년 8월 (완료)",
+                    roadmap_phase0_item3: "밈 캐릭터 푸리(PURI) 공식 출시",
+                    roadmap_phase0_item4: "저작권 등록 완료된 IP 기반 프로젝트 전개",
+                    roadmap_phase1_title: "✅ 2025년 9월 (완료)",
+                    roadmap_phase1_item1: "9월 10일: $PURI 펌프펀 출시 (100% 유통, 커뮤니티 중심 발행)",
+                    roadmap_phase1_item2: "자사주 매입을 통한 상금 풀(Fund Pool) 마련 → 커뮤니티 이벤트·미션 보상 재원 확보",
+                    roadmap_phase1_item3: "커뮤니티 구축 시작: 텔레그램/트위터 확장, 밈 콘테스트, 지구인 미션 v1 진행",
+                    roadmap_phase2_title: "🔜 2025년 4분기 (10~12월)",
+                    roadmap_phase2_sub_title1: "토큰 유틸리티 준비",
+                    roadmap_phase2_item1: "스테이킹/락업 보상 시스템 설계",
+                    roadmap_phase2_item2: "거래소 수익 기반 매입·소각 메커니즘 확정",
+                    roadmap_phase2_sub_title2: "커뮤니티 생태계 강화",
+                    roadmap_phase2_item3: "지구인 미션 시즌2",
+                    roadmap_phase2_item4: "$PURI 홀더 전용 이벤트 & 에어드랍",
+                    roadmap_phase2_sub_title3: "브랜딩/웹사이트",
+                    roadmap_phase2_item5: "PURIX 랜딩페이지 & 브랜드 아이덴티티 확립",
+                    roadmap_phase2_item6: "초기 파트너십/유동성 풀 테스트",
+                    roadmap_phase3_title: "🚀 2026년 1분기 (1~3월)",
+                    roadmap_phase3_subtitle: "PURIX 거래소 베타 출시",
+                    roadmap_phase3_sub_title1: "거래소 런칭 (Beta)",
+                    roadmap_phase3_item1: "Non-custodial 하이브리드 거래소 공개",
+                    roadmap_phase3_item2: "지갑 연결 기반 거래 시작",
+                    roadmap_phase3_sub_title2: "$PURI 토큰 유틸리티 적용",
+                    roadmap_phase3_item3: "보유자 전용 수수료 할인",
+                    roadmap_phase3_item4: "스테이킹 리워드 & 런치패드 우선 참여권",
+                    roadmap_phase3_item5: "수익 기반 매입·소각 시작",
+                    roadmap_phase3_sub_title3: "커뮤니티 확장",
+                    roadmap_phase3_item6: "글로벌 밈 캠페인 + PURIX 거래 챌린지",
+                    roadmap_phase3_item7: "신규 지구인 미션 → 거래소와 직접 연계",
+                    onboarding_title: "3단계로 시작하세요",
+                    onboarding_step1_title: "1. 지갑 연결",
+                    onboarding_step1_text: "MetaMask, Phantom 등 지원하는 지갑을 연결하세요.",
+                    onboarding_step2_title: "2. 거래 쌍 선택",
+                    onboarding_step2_text: "원하는 코인 거래 쌍을 검색하고 선택하세요.",
+                    onboarding_step3_title: "3. 원클릭 체결",
+                    onboarding_step3_text: "거래가 즉시 체결되고 자산은 곧바로 당신의 지갑으로 전송됩니다.",
+                    footer_slogan: "PURIX – 지갑만 연결하면 우주급 거래가 시작됩니다",
+                    btn_contact_us: "문의하기"
+                },
+                ja: {
+                    hero_slogan: "ひとつの取引所。ひとつの宇宙。",
+                    hero_subcopy: "ウォレットを接続するだけで始まる宇宙的な取引体験",
+                    linktree_title: "PURIXの宇宙を探検しよう",
+                    linktree_twitter_desc: "最新ニュースと情報を受け取りましょう。",
+                    linktree_telegram_desc: "コミュニティに参加して交流しましょう。",
+                    linktree_youtube_desc: "さまざまな動画コンテンツをチェック。",
+                    linktree_pump_desc: "PURIを直接購入して取引しましょう。",
+                    features_title: "CEXのように速く、DEXのように安全に",
+                    feature_non_custodial_title: "Non-Custodial",
+                    feature_non_custodial_text: "資産は常にあなたのウォレットに保管され、完全な所有権を持ちます。",
+                    feature_kyc_title: "No KYC",
+                    feature_kyc_text: "面倒な登録手続きや個人認証は不要です。",
+                    feature_hybrid_title: "ハイブリッド流動性",
+                    feature_hybrid_text: "CEXのオーダーブックとDEXのプールを統合して最適な取引を提供します。",
+                    security_title: "あなたの資産はあなただけのもの",
+                    security_point_1: "中央管理なし – ハッキングリスクを最小化",
+                    security_point_2: "スマートコントラクトによる透明な取引",
+                    security_point_3: "グローバルAMLモジュール搭載 – 安全な環境を維持",
+                    community_title: "透明性の上に築かれた統合取引所",
+                    community_desc: "PumpFunで100%流通した$PURI、チーム割当なしで誰もが同じスタートライン。PURIXはCEXの利便性、DEXの自由、PURI Hyper Index、そしてコミュニティの力で成長します。",
+                    token_benefits_title: "$PURIトークンのメリット",
+                    token_benefit_1: "$PURI保有者専用の取引手数料割引",
+                    token_benefit_2: "アースリングミッション参加でエアドロップ報酬",
+                    token_benefit_3: "ステーキングで追加報酬＆ローンチパッド優先参加",
+                    token_benefit_4: "取引所収益の一部で買い戻し・バーン",
+                    btn_learn_token: "$PURIについて学ぶ",
+                    btn_join_community: "コミュニティに参加",
+                    roadmap_title: "PURIXロードマップ",
+                    roadmap_phase0_title: "✅ 2025年2月（完了）",
+                    roadmap_phase0_item1: "専任チームの結成完了",
+                    roadmap_phase0_item2: "CEX + DEX + PURI Hyper Index 統合取引所の本格開発開始",
+                    roadmap_phase0_title2: "✅ 2025年8月（完了）",
+                    roadmap_phase0_item3: "ミームキャラクターPURI公式リリース",
+                    roadmap_phase0_item4: "著作権登録済みIPを基盤としたプロジェクト展開",
+                    roadmap_phase1_title: "✅ 2025年9月（完了）",
+                    roadmap_phase1_item1: "9月10日: $PURIがPumpFunでローンチ（100%流通、コミュニティ中心発行）",
+                    roadmap_phase1_item2: "自社買戻しによるファンドプール確保 → コミュニティイベント・ミッション報酬資金",
+                    roadmap_phase1_item3: "コミュニティ構築開始: Telegram/Twitter拡張、ミームコンテスト、アースリングミッションv1実施",
+                    roadmap_phase2_title: "🔜 2025年第4四半期（10〜12月）",
+                    roadmap_phase2_sub_title1: "トークンユーティリティ準備",
+                    roadmap_phase2_item1: "ステーキング/ロックアップ報酬システム設計",
+                    roadmap_phase2_item2: "取引所収益に基づく買戻し・バーンメカニズム確定",
+                    roadmap_phase2_sub_title2: "コミュニティエコシステム強化",
+                    roadmap_phase2_item3: "アースリングミッション シーズン2",
+                    roadmap_phase2_item4: "$PURIホルダー専用イベント＆エアドロップ",
+                    roadmap_phase2_sub_title3: "ブランディング / ウェブサイト",
+                    roadmap_phase2_item5: "PURIXランディングページ＆ブランドアイデンティティ確立",
+                    roadmap_phase2_item6: "初期パートナーシップ/流動性プールテスト",
+                    roadmap_phase3_title: "🚀 2026年第1四半期（1〜3月）",
+                    roadmap_phase3_subtitle: "PURIX取引所ベータ版リリース",
+                    roadmap_phase3_sub_title1: "取引所ローンチ（Beta）",
+                    roadmap_phase3_item1: "Non-custodial統合取引所公開",
+                    roadmap_phase3_item2: "ウォレット接続ベースの取引開始",
+                    roadmap_phase3_sub_title2: "$PURIトークンユーティリティ適用",
+                    roadmap_phase3_item3: "保有者専用の手数料割引",
+                    roadmap_phase3_item4: "ステーキング報酬＆ローンチパッド優先参加権",
+                    roadmap_phase3_item5: "収益に基づく買戻し・バーン開始",
+                    roadmap_phase3_sub_title3: "コミュニティ拡張",
+                    roadmap_phase3_item6: "グローバルミームキャンペーン + PURIX取引チャレンジ",
+                    roadmap_phase3_item7: "新しいアースリングミッション → 取引所と直接連携",
+                    onboarding_title: "3ステップで始めよう",
+                    onboarding_step1_title: "1. ウォレット接続",
+                    onboarding_step1_text: "MetaMaskやPhantomなどの対応ウォレットを接続してください。",
+                    onboarding_step2_title: "2. 取引ペア選択",
+                    onboarding_step2_text: "希望する暗号資産の取引ペアを検索して選択してください。",
+                    onboarding_step3_title: "3. ワンクリック注文",
+                    onboarding_step3_text: "取引は即座に成立し、資産はすぐにあなたのウォレットに送信されます。",
+                    footer_slogan: "PURIX – ウォレットを接続するだけで宇宙規模の取引が始まります",
+                    btn_contact_us: "お問い合わせ"
+                },
+
+                zh: {
+                    hero_slogan: "一个交易所。一个宇宙。",
+                    hero_subcopy: "只需连接钱包，就能开启宇宙级的交易体验",
+                    linktree_title: "探索 PURIX 宇宙",
+                    linktree_twitter_desc: "获取最新的新闻和信息。",
+                    linktree_telegram_desc: "加入社区，与大家互动交流。",
+                    linktree_youtube_desc: "查看各种视频内容。",
+                    linktree_pump_desc: "直接购买并交易 PURI。",
+                    features_title: "像 CEX 一样快速，像 DEX 一样安全",
+                    feature_non_custodial_title: "非托管",
+                    feature_non_custodial_text: "资产始终保存在您的钱包中，您完全拥有所有权。",
+                    feature_kyc_title: "无 KYC",
+                    feature_kyc_text: "无需繁琐的注册流程或个人信息验证。",
+                    feature_hybrid_title: "混合流动性",
+                    feature_hybrid_text: "整合 CEX 订单簿和 DEX 流动资金池，提供最佳交易。",
+                    security_title: "您的资产只属于您自己",
+                    security_point_1: "无中心化托管 – 最大限度减少被黑客攻击风险",
+                    security_point_2: "基于智能合约的透明交易",
+                    security_point_3: "内置全球 AML 模块 – 维护安全的环境",
+                    community_title: "建立在透明性之上的统一交易所",
+                    community_desc: "$PURI 在 PumpFun 上 100% 流通，没有团队份额，人人起点相同。PURIX 结合了 CEX 的便利性、DEX 的自由、PURI Hyper Index，以及社区的力量不断成长。",
+                    token_benefits_title: "$PURI 代币权益",
+                    token_benefit_1: "$PURI 持有者专享交易手续费折扣",
+                    token_benefit_2: "参与地球人任务可获得空投奖励",
+                    token_benefit_3: "质押可获得额外奖励并优先参与 Launchpad",
+                    token_benefit_4: "使用交易所部分收入回购并销毁",
+                    btn_learn_token: "了解 $PURI 代币",
+                    btn_join_community: "加入社区",
+                    roadmap_title: "PURIX 路线图",
+                    roadmap_phase0_title: "✅ 2025年2月（完成）",
+                    roadmap_phase0_item1: "专门团队组建完成",
+                    roadmap_phase0_item2: "CEX + DEX + PURI Hyper Index 统一交易所全面开发启动",
+                    roadmap_phase0_title2: "✅ 2025年8月（完成）",
+                    roadmap_phase0_item3: "PURI 表情包角色正式发布",
+                    roadmap_phase0_item4: "基于已注册版权的 IP 展开项目",
+                    roadmap_phase1_title: "✅ 2025年9月（完成）",
+                    roadmap_phase1_item1: "9月10日：$PURI 在 PumpFun 上发行（100% 流通，社区驱动发行）",
+                    roadmap_phase1_item2: "通过回购建立奖金池 → 用于社区活动和任务奖励",
+                    roadmap_phase1_item3: "开始社区建设：扩展 Telegram/Twitter、举办表情包大赛、开展地球人任务 v1",
+                    roadmap_phase2_title: "🔜 2025年第四季度（10–12月）",
+                    roadmap_phase2_sub_title1: "代币功能准备",
+                    roadmap_phase2_item1: "设计质押/锁仓奖励系统",
+                    roadmap_phase2_item2: "确定基于交易所收入的回购和销毁机制",
+                    roadmap_phase2_sub_title2: "社区生态扩展",
+                    roadmap_phase2_item3: "地球人任务第2季",
+                    roadmap_phase2_item4: "$PURI 持有者专属活动和空投",
+                    roadmap_phase2_sub_title3: "品牌 / 网站",
+                    roadmap_phase2_item5: "建立 PURIX 登陆页面和品牌形象",
+                    roadmap_phase2_item6: "测试初始合作伙伴关系/流动性池",
+                    roadmap_phase3_title: "🚀 2026年第一季度（1–3月）",
+                    roadmap_phase3_subtitle: "PURIX 交易所 Beta 发布",
+                    roadmap_phase3_sub_title1: "交易所上线（Beta）",
+                    roadmap_phase3_item1: "发布非托管统一交易所",
+                    roadmap_phase3_item2: "基于钱包连接的交易启动",
+                    roadmap_phase3_sub_title2: "$PURI 代币功能应用",
+                    roadmap_phase3_item3: "持有者专属手续费折扣",
+                    roadmap_phase3_item4: "质押奖励和 Launchpad 优先参与",
+                    roadmap_phase3_item5: "启动基于收入的回购与销毁",
+                    roadmap_phase3_sub_title3: "社区扩展",
+                    roadmap_phase3_item6: "全球表情包活动 + PURIX 交易挑战赛",
+                    roadmap_phase3_item7: "新地球人任务 → 与交易所直接联动",
+                    onboarding_title: "三步开始",
+                    onboarding_step1_title: "1. 连接钱包",
+                    onboarding_step1_text: "连接 MetaMask、Phantom 等支持的钱包。",
+                    onboarding_step2_title: "2. 选择交易对",
+                    onboarding_step2_text: "搜索并选择您想要的交易对。",
+                    onboarding_step3_title: "3. 一键执行",
+                    onboarding_step3_text: "交易即时执行，资产立即发送到您的钱包。",
+                    footer_slogan: "PURIX – 连接钱包，开启宇宙级交易",
+                    btn_contact_us: "联系我们"
+                },
+
+                es: {
+                    hero_slogan: "Un Exchange. Un Universo.",
+                    hero_subcopy: "La experiencia de trading cósmico comienza solo conectando tu wallet.",
+                    linktree_title: "Explora el Universo de PURIX",
+                    linktree_twitter_desc: "Recibe las últimas noticias y actualizaciones.",
+                    linktree_telegram_desc: "Únete a la comunidad y conéctate con otros.",
+                    linktree_youtube_desc: "Descubre más contenido en video.",
+                    linktree_pump_desc: "Compra y comercia PURI directamente.",
+                    features_title: "Tan rápido como un CEX, tan seguro como un DEX",
+                    feature_non_custodial_title: "No Custodial",
+                    feature_non_custodial_text: "Los activos siempre permanecen en tu wallet, dándote plena propiedad.",
+                    feature_kyc_title: "Sin KYC",
+                    feature_kyc_text: "No se requieren registros complicados ni verificación personal.",
+                    feature_hybrid_title: "Liquidez Híbrida",
+                    feature_hybrid_text: "Integra libros de órdenes de CEX y pools de DEX para ofrecer las mejores operaciones.",
+                    security_title: "Tus activos solo te pertenecen a ti",
+                    security_point_1: "Sin custodia central – riesgo mínimo de hackeo",
+                    security_point_2: "Trading transparente basado en smart contracts",
+                    security_point_3: "Módulos AML globales integrados – entorno seguro garantizado",
+                    community_title: "Un Exchange Unificado Construido sobre Transparencia",
+                    community_desc: "$PURI distribuido 100% en PumpFun, sin asignación al equipo — todos empiezan igual. PURIX crece con la conveniencia del CEX, la libertad del DEX, el PURI Hyper Index y la fuerza de su comunidad.",
+                    token_benefits_title: "Beneficios del Token $PURI",
+                    token_benefit_1: "Descuentos exclusivos en comisiones de trading para holders de $PURI",
+                    token_benefit_2: "Recompensas de airdrop al participar en Misiones Terrícolas",
+                    token_benefit_3: "Recompensas extra y acceso prioritario a Launchpad mediante staking",
+                    token_benefit_4: "Recompra y quema financiada con ingresos del exchange",
+                    btn_learn_token: "Conoce el Token $PURI",
+                    btn_join_community: "Únete a la Comunidad",
+                    roadmap_title: "Hoja de Ruta de PURIX",
+                    roadmap_phase0_title: "✅ Febrero 2025 (Completado)",
+                    roadmap_phase0_item1: "Formación del equipo dedicado completada",
+                    roadmap_phase0_item2: "Inicio del desarrollo a gran escala del Exchange Unificado CEX + DEX + PURI Hyper Index",
+                    roadmap_phase0_title2: "✅ Agosto 2025 (Completado)",
+                    roadmap_phase0_item3: "Lanzamiento oficial del personaje meme PURI",
+                    roadmap_phase0_item4: "Expansión del proyecto basado en IP registrada con copyright",
+                    roadmap_phase1_title: "✅ Septiembre 2025 (Completado)",
+                    roadmap_phase1_item1: "10 de septiembre: $PURI lanzado en PumpFun (100% en circulación, emisión dirigida por la comunidad)",
+                    roadmap_phase1_item2: "Fondo comunitario asegurado mediante recompras de tesorería → recursos para eventos y misiones",
+                    roadmap_phase1_item3: "Inicio de construcción comunitaria: expansión de Telegram/Twitter, concursos de memes, Misión Terrícolas v1",
+                    roadmap_phase2_title: "🔜 Q4 2025 (Oct–Dic)",
+                    roadmap_phase2_sub_title1: "Preparación de Utilidad del Token",
+                    roadmap_phase2_item1: "Diseño del sistema de recompensas de staking/bloqueo",
+                    roadmap_phase2_item2: "Finalización del mecanismo de recompra y quema basado en ingresos del exchange",
+                    roadmap_phase2_sub_title2: "Expansión del Ecosistema Comunitario",
+                    roadmap_phase2_item3: "Misión Terrícolas Temporada 2",
+                    roadmap_phase2_item4: "Eventos exclusivos y airdrops para holders de $PURI",
+                    roadmap_phase2_sub_title3: "Branding / Sitio Web",
+                    roadmap_phase2_item5: "Establecer landing page de PURIX e identidad de marca",
+                    roadmap_phase2_item6: "Probar asociaciones iniciales / pools de liquidez",
+                    roadmap_phase3_title: "🚀 Q1 2026 (Ene–Mar)",
+                    roadmap_phase3_subtitle: "Lanzamiento Beta del Exchange PURIX",
+                    roadmap_phase3_sub_title1: "Lanzamiento del Exchange (Beta)",
+                    roadmap_phase3_item1: "Lanzamiento del Exchange Unificado no custodial",
+                    roadmap_phase3_item2: "Inicio del trading basado en wallet",
+                    roadmap_phase3_sub_title2: "Integración de la Utilidad del Token $PURI",
+                    roadmap_phase3_item3: "Descuentos en comisiones para holders",
+                    roadmap_phase3_item4: "Recompensas de staking y acceso prioritario a Launchpad",
+                    roadmap_phase3_item5: "Inicio de recompras y quema financiadas con ingresos",
+                    roadmap_phase3_sub_title3: "Expansión Comunitaria",
+                    roadmap_phase3_item6: "Campaña global de memes + reto de trading de PURIX",
+                    roadmap_phase3_item7: "Nuevas Misiones Terrícolas → conectadas directamente al exchange",
+                    onboarding_title: "Empieza en 3 Pasos",
+                    onboarding_step1_title: "1. Conecta tu Wallet",
+                    onboarding_step1_text: "Conecta wallets compatibles como MetaMask o Phantom.",
+                    onboarding_step2_title: "2. Elige un Par de Trading",
+                    onboarding_step2_text: "Busca y selecciona el par que desees operar.",
+                    onboarding_step3_title: "3. Ejecución con Un Clic",
+                    onboarding_step3_text: "Las operaciones se ejecutan al instante y los activos se envían directamente a tu wallet.",
+                    footer_slogan: "PURIX – Conecta tu wallet y comienza a comerciar a escala cósmica",
+                    btn_contact_us: "Contáctanos"
+                },
+
+                fr: {
+                    hero_slogan: "Un Exchange. Un Univers.",
+                    hero_subcopy: "Une expérience de trading cosmique commence simplement en connectant votre wallet.",
+                    linktree_title: "Explorez l’Univers PURIX",
+                    linktree_twitter_desc: "Recevez les dernières nouvelles et mises à jour.",
+                    linktree_telegram_desc: "Rejoignez la communauté et échangez avec les autres.",
+                    linktree_youtube_desc: "Découvrez divers contenus vidéo.",
+                    linktree_pump_desc: "Achetez et échangez du PURI directement.",
+                    features_title: "Aussi rapide qu’un CEX, aussi sûr qu’un DEX",
+                    feature_non_custodial_title: "Non-Custodial",
+                    feature_non_custodial_text: "Les actifs restent toujours dans votre wallet, vous donnant une pleine propriété.",
+                    feature_kyc_title: "Pas de KYC",
+                    feature_kyc_text: "Aucune inscription compliquée ni vérification personnelle requise.",
+                    feature_hybrid_title: "Liquidité Hybride",
+                    feature_hybrid_text: "Intègre les carnets d’ordres CEX et les pools DEX pour fournir des échanges optimaux.",
+                    security_title: "Vos actifs n’appartiennent qu’à vous",
+                    security_point_1: "Pas de garde centralisée – risque de piratage minimisé",
+                    security_point_2: "Trading transparent basé sur des smart contracts",
+                    security_point_3: "Modules AML mondiaux intégrés – maintien d’un environnement sûr",
+                    community_title: "Un Exchange Unifié Fondé sur la Transparence",
+                    community_desc: "$PURI distribué à 100 % via PumpFun, sans allocation à l’équipe — tout le monde commence sur un pied d’égalité. PURIX grandit grâce à la commodité du CEX, la liberté du DEX, le PURI Hyper Index et la force de sa communauté.",
+                    token_benefits_title: "Avantages du Token $PURI",
+                    token_benefit_1: "Réductions exclusives sur les frais de trading pour les détenteurs de $PURI",
+                    token_benefit_2: "Récompenses d’airdrop pour la participation aux Missions Terriennes",
+                    token_benefit_3: "Récompenses supplémentaires et accès prioritaire au Launchpad grâce au staking",
+                    token_benefit_4: "Rachat et burn financés par les revenus de l’exchange",
+                    btn_learn_token: "En savoir plus sur le Token $PURI",
+                    btn_join_community: "Rejoindre la Communauté",
+                    roadmap_title: "Feuille de Route PURIX",
+                    roadmap_phase0_title: "✅ Février 2025 (Terminé)",
+                    roadmap_phase0_item1: "Formation de l’équipe dédiée terminée",
+                    roadmap_phase0_item2: "Début du développement à grande échelle de l’Exchange Unifié CEX + DEX + PURI Hyper Index",
+                    roadmap_phase0_title2: "✅ Août 2025 (Terminé)",
+                    roadmap_phase0_item3: "Lancement officiel du personnage mème PURI",
+                    roadmap_phase0_item4: "Expansion du projet basé sur une IP enregistrée au copyright",
+                    roadmap_phase1_title: "✅ Septembre 2025 (Terminé)",
+                    roadmap_phase1_item1: "10 septembre : $PURI lancé sur PumpFun (100 % en circulation, émission dirigée par la communauté)",
+                    roadmap_phase1_item2: "Fonds communautaire assuré via rachats de trésorerie → ressources pour événements & missions",
+                    roadmap_phase1_item3: "Début de la construction communautaire : extension de Telegram/Twitter, concours de mèmes, Mission Terrienne v1",
+                    roadmap_phase2_title: "🔜 T4 2025 (Oct–Déc)",
+                    roadmap_phase2_sub_title1: "Préparation de l’Utilité du Token",
+                    roadmap_phase2_item1: "Conception du système de récompenses de staking/verrouillage",
+                    roadmap_phase2_item2: "Finalisation du mécanisme de rachat & burn basé sur les revenus de l’exchange",
+                    roadmap_phase2_sub_title2: "Expansion de l’Écosystème Communautaire",
+                    roadmap_phase2_item3: "Mission Terrienne Saison 2",
+                    roadmap_phase2_item4: "Événements exclusifs & airdrops pour les détenteurs de $PURI",
+                    roadmap_phase2_sub_title3: "Branding / Site Web",
+                    roadmap_phase2_item5: "Établir la landing page PURIX & l’identité de marque",
+                    roadmap_phase2_item6: "Tester partenariats initiaux / pools de liquidité",
+                    roadmap_phase3_title: "🚀 T1 2026 (Jan–Mar)",
+                    roadmap_phase3_subtitle: "Lancement Beta de l’Exchange PURIX",
+                    roadmap_phase3_sub_title1: "Lancement de l’Exchange (Beta)",
+                    roadmap_phase3_item1: "Lancement de l’Exchange Unifié non-custodial",
+                    roadmap_phase3_item2: "Début du trading basé sur wallet",
+                    roadmap_phase3_sub_title2: "Intégration de l’Utilité du Token $PURI",
+                    roadmap_phase3_item3: "Réductions de frais pour les détenteurs",
+                    roadmap_phase3_item4: "Récompenses de staking & accès prioritaire au Launchpad",
+                    roadmap_phase3_item5: "Début des rachats & burn financés par les revenus",
+                    roadmap_phase3_sub_title3: "Expansion Communautaire",
+                    roadmap_phase3_item6: "Campagne mème mondiale + défi de trading PURIX",
+                    roadmap_phase3_item7: "Nouvelles Missions Terriennes → reliées directement à l’exchange",
+                    onboarding_title: "Commencez en 3 Étapes",
+                    onboarding_step1_title: "1. Connectez Votre Wallet",
+                    onboarding_step1_text: "Connectez des wallets compatibles comme MetaMask ou Phantom.",
+                    onboarding_step2_title: "2. Choisissez une Paire de Trading",
+                    onboarding_step2_text: "Recherchez et sélectionnez la paire que vous souhaitez trader.",
+                    onboarding_step3_title: "3. Exécution en Un Clic",
+                    onboarding_step3_text: "Les transactions s’exécutent instantanément et les actifs sont envoyés directement à votre wallet.",
+                    footer_slogan: "PURIX – Connectez votre wallet et commencez à trader à l’échelle cosmique",
+                    btn_contact_us: "Contactez-Nous"
+                },
+
+                de: {
+                    hero_slogan: "Eine Börse. Ein Universum.",
+                    hero_subcopy: "Ein kosmisches Handelserlebnis beginnt mit nur einer Wallet-Verbindung.",
+                    linktree_title: "Erkunde das PURIX-Universum",
+                    linktree_twitter_desc: "Erhalte die neuesten Nachrichten und Updates.",
+                    linktree_telegram_desc: "Tritt der Community bei und vernetze dich mit anderen.",
+                    linktree_youtube_desc: "Entdecke verschiedene Video-Inhalte.",
+                    linktree_pump_desc: "Kaufe und handle PURI direkt.",
+                    features_title: "So schnell wie ein CEX, so sicher wie ein DEX",
+                    feature_non_custodial_title: "Non-Custodial",
+                    feature_non_custodial_text: "Deine Assets bleiben immer in deiner Wallet – volle Eigentümerschaft garantiert.",
+                    feature_kyc_title: "Kein KYC",
+                    feature_kyc_text: "Keine komplizierte Registrierung oder persönliche Verifizierung erforderlich.",
+                    feature_hybrid_title: "Hybride Liquidität",
+                    feature_hybrid_text: "Kombiniert CEX-Orderbücher und DEX-Liquiditätspools für optimale Trades.",
+                    security_title: "Deine Assets gehören nur dir",
+                    security_point_1: "Keine zentrale Verwahrung – minimiertes Hackerrisiko",
+                    security_point_2: "Transparenter Handel durch Smart Contracts",
+                    security_point_3: "Integrierte globale AML-Module – sichere Umgebung gewährleistet",
+                    community_title: "Eine Vereinheitlichte Börse, aufgebaut auf Transparenz",
+                    community_desc: "$PURI wurde zu 100 % über PumpFun verteilt, ohne Team-Allokation – alle starten gleich. PURIX wächst durch die Bequemlichkeit von CEX, die Freiheit von DEX, den PURI Hyper Index und die Stärke seiner Community.",
+                    token_benefits_title: "Vorteile des $PURI-Tokens",
+                    token_benefit_1: "Exklusive Handelsgebührenrabatte für $PURI-Inhaber",
+                    token_benefit_2: "Airdrop-Belohnungen für die Teilnahme an Erdling-Missionen",
+                    token_benefit_3: "Zusätzliche Belohnungen und vorrangiger Launchpad-Zugang durch Staking",
+                    token_benefit_4: "Rückkäufe und Token-Burns, finanziert durch Börsenerlöse",
+                    btn_learn_token: "Mehr über $PURI erfahren",
+                    btn_join_community: "Der Community beitreten",
+                    roadmap_title: "PURIX-Roadmap",
+                    roadmap_phase0_title: "✅ Februar 2025 (Abgeschlossen)",
+                    roadmap_phase0_item1: "Gründung eines dedizierten Teams abgeschlossen",
+                    roadmap_phase0_item2: "Start der umfassenden Entwicklung der Vereinheitlichten Börse mit CEX + DEX + PURI Hyper Index",
+                    roadmap_phase0_title2: "✅ August 2025 (Abgeschlossen)",
+                    roadmap_phase0_item3: "Offizieller Launch des Meme-Charakters PURI",
+                    roadmap_phase0_item4: "Projekterweiterung basierend auf urheberrechtlich geschütztem IP",
+                    roadmap_phase1_title: "✅ September 2025 (Abgeschlossen)",
+                    roadmap_phase1_item1: "10. September: $PURI-Launch auf PumpFun (100 % im Umlauf, Community-getriebene Ausgabe)",
+                    roadmap_phase1_item2: "Community-Fonds durch Treasury-Rückkäufe gesichert → Ressourcen für Events & Missionen",
+                    roadmap_phase1_item3: "Beginn des Community-Aufbaus: Erweiterung von Telegram/Twitter, Meme-Wettbewerbe, Erdling-Mission v1",
+                    roadmap_phase2_title: "🔜 Q4 2025 (Okt–Dez)",
+                    roadmap_phase2_sub_title1: "Vorbereitung der Token-Utility",
+                    roadmap_phase2_item1: "Design des Staking-/Lockup-Belohnungssystems",
+                    roadmap_phase2_item2: "Finalisierung des Rückkauf- & Burn-Mechanismus basierend auf Börsenerlösen",
+                    roadmap_phase2_sub_title2: "Ausbau des Community-Ökosystems",
+                    roadmap_phase2_item3: "Erdling-Mission Staffel 2",
+                    roadmap_phase2_item4: "Exklusive Events & Airdrops für $PURI-Inhaber",
+                    roadmap_phase2_sub_title3: "Branding / Website",
+                    roadmap_phase2_item5: "PURIX-Landingpage & Markenidentität etablieren",
+                    roadmap_phase2_item6: "Tests mit ersten Partnerschaften / Liquiditätspools",
+                    roadmap_phase3_title: "🚀 Q1 2026 (Jan–Mär)",
+                    roadmap_phase3_subtitle: "Beta-Launch der PURIX-Börse",
+                    roadmap_phase3_sub_title1: "Börsenstart (Beta)",
+                    roadmap_phase3_item1: "Veröffentlichung der Non-Custodial Vereinheitlichten Börse",
+                    roadmap_phase3_item2: "Wallet-basiertes Trading startet",
+                    roadmap_phase3_sub_title2: "Integration der $PURI-Token-Utility",
+                    roadmap_phase3_item3: "Gebührenrabatte für Inhaber",
+                    roadmap_phase3_item4: "Staking-Belohnungen & vorrangiger Launchpad-Zugang",
+                    roadmap_phase3_item5: "Beginn der rückkauf- & burn-finanzierten Mechanismen",
+                    roadmap_phase3_sub_title3: "Community-Erweiterung",
+                    roadmap_phase3_item6: "Globale Meme-Kampagne + PURIX-Trading-Challenge",
+                    roadmap_phase3_item7: "Neue Erdling-Missionen → direkt mit der Börse verknüpft",
+                    onboarding_title: "Starte in 3 Schritten",
+                    onboarding_step1_title: "1. Wallet verbinden",
+                    onboarding_step1_text: "Verbinde unterstützte Wallets wie MetaMask oder Phantom.",
+                    onboarding_step2_title: "2. Handelspaar wählen",
+                    onboarding_step2_text: "Suche und wähle dein gewünschtes Handelspaar.",
+                    onboarding_step3_title: "3. One-Click-Ausführung",
+                    onboarding_step3_text: "Trades werden sofort ausgeführt und Assets direkt an deine Wallet gesendet.",
+                    footer_slogan: "PURIX – Verbinde deine Wallet und beginne Trading im kosmischen Maßstab",
+                    btn_contact_us: "Kontaktiere uns"
+                },
+
+            };
+
+            const typingSlogan = document.getElementById('typing-slogan');
+            const currentLangSpan = document.getElementById('current-lang-text');
+            let currentLang = 'en';
+            let typingTimeout;
+
+            function typeWriter(text) {
+                clearTimeout(typingTimeout);
+                let i = 0;
+                typingSlogan.textContent = '';
+                function type() {
+                    if (i < text.length) {
+                        typingSlogan.textContent += text.charAt(i);
+                        i++;
+                        typingTimeout = setTimeout(type, 100);
+                    } else {
+                        typingTimeout = setTimeout(() => {
+                            typeWriter(text);
+                        }, 5000); // 5-second delay before restarting
+                    }
+                }
+                type();
+            }
+
+            function updateContent(lang) {
+                document.documentElement.lang = lang;
+                currentLangSpan.textContent = lang.toUpperCase();
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    const translation = translations[lang][key];
+                    if (translation) {
+                        el.textContent = translation;
+                    }
+                });
+                typeWriter(translations[lang].hero_slogan);
+            }
+
+            updateContent(currentLang);
+
+            document.querySelector('.language-menu').addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    const newLang = e.target.getAttribute('data-lang');
+                    if (newLang && newLang !== currentLang) {
+                        currentLang = newLang;
+                        updateContent(currentLang);
+                    }
+                    const detailsElement = e.target.closest('details');
+                    if (detailsElement) {
+                        detailsElement.open = false;
+                    }
+                }
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+            window.addEventListener("scroll", () => {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    scrollToTopBtn.classList.add("show");
+                } else {
+                    scrollToTopBtn.classList.remove("show");
+                }
+            });
+
+            scrollToTopBtn.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

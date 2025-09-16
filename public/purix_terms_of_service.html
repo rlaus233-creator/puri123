@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PURIX — Terms of Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: dark; }
+    body { background:#0b0f1a; font-family: system-ui, sans-serif; }
+    .container{ max-width:1120px; }
+    .section-gap{ margin-top:7rem; }
+    .card{ @apply bg-white/5 border border-white/10 rounded-2xl p-10 md:p-14; }
+    .h1{ @apply text-5xl md:text-6xl font-extrabold leading-tight tracking-tight; }
+    .chapter{ @apply text-3xl md:text-4xl font-extrabold flex items-center gap-3 text-teal-300; }
+    .body{ @apply text-gray-300 text-lg md:text-xl leading-relaxed; }
+    .list{ @apply list-disc pl-6 space-y-4 text-gray-300 text-lg md:text-xl leading-relaxed; }
+    .divider{ @apply border-b border-white/20 mb-10 md:mb-12; }
+    .kicker{ @apply text-gray-400 text-base md:text-lg mt-6; }
+    .reveal{ opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s ease; }
+    .reveal.show{ opacity:1; transform:translateY(0); }
+    a.link{ @apply text-teal-300 hover:text-teal-200 underline; }
+  </style>
+</head>
+<body class="text-white">
+  <!-- Back Only -->
+  <div class="fixed top-6 left-6 z-50">
+    <button onclick="history.back()"
+      class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-lg font-semibold transition">
+      ⬅️ Back
+    </button>
+  </div>
+
+  <main class="container mx-auto px-6 pt-32 pb-40">
+    <header class="text-center mb-16 reveal">
+      <h1 class="h1">Terms of Service</h1>
+      <p class="kicker">Effective date: 2025-09-16 • PURIX Unified Exchange (the “Service”)</p>
+    </header>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">1) Acceptance of Terms</h2>
+      <div class="card mt-8 body">
+        <p>
+          By accessing or using the Service, you agree to these Terms of Service (the “Terms”). If you do not agree, do not use the Service. 
+          “PURI Labs”, “we”, or “us” refers to the team developing the PURIX Unified Exchange and related tools.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">2) Eligibility & Local Laws</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>You must be legally able to use crypto services in your jurisdiction and be at least the age of majority.</li>
+          <li>You are responsible for complying with all applicable laws and regulations.</li>
+          <li>Access is geo-restricted where prohibited by law and may be limited for certain regions or persons (e.g., sanctions lists).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">3) Non‑Custodial, Wallet‑First</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>The Service is non-custodial. You retain control of your assets at all times in your wallet.</li>
+          <li>Swaps/settlement occur on-chain via integrated protocols (e.g., routing aggregators). Transaction approvals are your responsibility.</li>
+          <li>No traditional accounts or deposits are held by PURI Labs.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">4) PURI Index & Markets</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>The PURI Hyper Index is a custom benchmark derived from external market indicators and calculated on-chain via oracles.</li>
+          <li>Index-based experiences (e.g., prediction markets) are experimental and informational in nature and are not traditional financial products.</li>
+          <li>Results may depend on third‑party data sources; accuracy and availability are not guaranteed.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">5) Fees</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>Network fees (gas) and protocol fees apply. PURIX may charge platform fees as displayed in the interface.</li>
+          <li>Fees are subject to change via governance or notice in the interface.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">6) Prohibited Activities</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>Use of the Service for any unlawful purpose, market manipulation, money laundering, or sanctions evasion.</li>
+          <li>Interference with the Service, smart contracts, or oracles; attempting to breach or bypass security.</li>
+          <li>Automations or bots that impair Service stability or fair use.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">7) Risk Disclosure</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li><b>Market Risk:</b> Digital assets are volatile and may lose value, including to zero.</li>
+          <li><b>Smart Contract Risk:</b> Code may contain bugs or vulnerabilities; audits do not eliminate risk.</li>
+          <li><b>Oracle/Data Risk:</b> Third‑party feeds may be delayed, inaccurate, manipulated, or unavailable.</li>
+          <li><b>Stablecoin/Issuer Risk:</b> Certain tokens (e.g., USDT/USDC) may be frozen, de-pegged, or restricted by their issuers or authorities.</li>
+          <li><b>Regulatory Risk:</b> Laws and enforcement may change and could restrict or prohibit use of the Service.</li>
+          <li><b>Wallet/Key Risk:</b> You are solely responsible for safeguarding your private keys and seed phrases.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">8) No Investment, Tax, or Legal Advice</h2>
+      <div class="card mt-8 body">
+        <p>
+          Information provided by the Service is for informational and educational purposes only and does not constitute investment, tax, or legal advice. You should consult your own advisors.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">9) Disclaimers; Limitation of Liability</h2>
+      <div class="card mt-8 body">
+        <p>
+          THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. TO THE MAXIMUM EXTENT PERMITTED BY LAW, PURI LABS AND ITS CONTRIBUTORS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, NOR ANY LOSS OF PROFITS, REVENUE, DATA, OR USE, ARISING OUT OF OR RELATED TO THE SERVICE.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">10) Indemnification</h2>
+      <div class="card mt-8 body">
+        <p>
+          You agree to indemnify, defend, and hold harmless PURI Labs and its contributors from any claims, liabilities, damages, losses, and expenses (including reasonable attorneys’ fees) arising from your use of the Service or violation of these Terms.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">11) Changes; Suspension</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>We may modify these Terms and the Service at any time. Material changes will be reflected in the effective date above.</li>
+          <li>We may suspend, restrict, or disable the Service (in whole or in part) for maintenance, security, legal, or operational reasons.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">12) Governing Law; Dispute Resolution</h2>
+      <div class="card mt-8 body">
+        <p>
+          Governing law and venue will be announced with the public launch of the Service. For now, you agree to resolve disputes informally by contacting us first.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">13) Contact</h2>
+      <div class="card mt-8 body">
+        <p>
+          Questions? Reach us at <a class="link" href="mailto:puriop8@gmail.com">puriop8@gmail.com</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

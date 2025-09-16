@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About PURIX — Unified Exchange</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: dark; }
+    body { background:#0b0f1a; font-family: system-ui, sans-serif; }
+    .container{ max-width:1120px; }
+    .section-gap{ margin-top:7rem; }
+    .card{ @apply bg-white/5 border border-white/10 rounded-2xl p-10 md:p-14; }
+    .h1{ @apply text-5xl md:text-6xl font-extrabold leading-tight tracking-tight; }
+    .chapter{ @apply text-4xl md:text-5xl font-extrabold flex items-center gap-3 text-teal-300; }
+    .body{ @apply text-gray-300 text-lg md:text-xl leading-relaxed; }
+    .divider{ @apply border-b border-white/20 mb-10 md:mb-12; }
+    .reveal{ opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s ease; }
+    .reveal.show{ opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body class="text-white">
+  <!-- Back Only -->
+  <div class="fixed top-6 left-6 z-50">
+    <button onclick="history.back()"
+      class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-lg font-semibold transition">
+      ⬅️ Back
+    </button>
+  </div>
+
+  <main class="container mx-auto px-6 pt-32 pb-40">
+    <!-- Hero -->
+    <header class="text-center mb-16 reveal">
+      <h1 class="h1">About PURIX</h1>
+      <p class="text-2xl md:text-3xl font-semibold text-gray-200 mt-6">
+        🌌 Building the Unified Exchange of the Future
+      </p>
+      <p class="text-gray-400 text-base md:text-lg mt-6">
+        Non-custodial. Community-driven. Powered by $PURI.
+      </p>
+    </header>
+
+    <!-- Team Capability -->
+    <section id="team" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🤝 Team Capability</h2>
+      <div class="card mt-8 body">
+        <p>
+          <b>PURI Labs</b> is formed by experts from both <b>traditional finance</b> and the <b>blockchain industry</b>,
+          working together to build a <b>new kind of exchange experience</b>.
+        </p>
+        <p class="mt-8">
+          With deep knowledge in capital markets, trading infrastructure, and decentralized protocols,
+          our team is uniquely positioned to deliver the next generation of <b>unified exchange innovation</b>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section id="mission" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🚀 Our Mission</h2>
+      <div class="card mt-8 body">
+        <p>
+          We aim to establish $PURI as the <b>reserve currency of Web3</b> — connecting Earthlings to
+          borderless markets with transparency, security, and community at the core.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

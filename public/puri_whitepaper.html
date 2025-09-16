@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>$PURI Whitepaper — Hybrid Reserve Currency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background: #0b0f1a;
+      font-family: system-ui, sans-serif;
+    }
+
+    .container {
+      max-width: 1120px;
+    }
+
+    .section-gap {
+      margin-top: 7rem;
+    }
+
+    .card {
+      @apply bg-white/5 border border-white/10 rounded-2xl p-10 md:p-14;
+    }
+
+    .h1 {
+      @apply text-5xl md:text-6xl font-extrabold leading-tight tracking-tight;
+    }
+
+    .sub {
+      @apply text-2xl md:text-3xl font-semibold text-gray-200 mt-6;
+    }
+
+    .kicker {
+      @apply text-gray-400 text-base md:text-lg mt-6;
+    }
+
+    .chapter {
+      @apply text-4xl md:text-5xl font-extrabold flex items-center gap-3 text-teal-300;
+    }
+
+    .body {
+      @apply text-gray-300 text-lg md:text-xl leading-relaxed;
+    }
+
+    .list {
+      @apply list-disc pl-6 space-y-5 text-gray-300 text-lg md:text-xl leading-relaxed;
+    }
+
+    .divider {
+      @apply border-b border-white/20 mb-10 md:mb-12;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quick a {
+      @apply px-5 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-base md:text-lg font-medium;
+    }
+  </style>
+</head>
+
+<body class="text-white">
+  <!-- Back -->
+  <div class="fixed top-6 left-6 z-50">
+    <button onclick="history.back()"
+      class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-lg font-semibold transition">
+      ⬅️ Back
+    </button>
+  </div>
+
+  <main class="container mx-auto px-6 pt-32 pb-40">
+    <!-- Hero -->
+    <header class="text-center mb-16 reveal">
+      <h1 class="h1">$PURI Whitepaper</h1>
+      <p class="sub">🌍 Community-Driven Hybrid Reserve Currency</p>
+      <p class="kicker">Version: 2025-09-15 • Informational only, not investment advice</p>
+    </header>
+
+    <!-- Quick Nav -->
+    <nav class="quick flex flex-wrap justify-center gap-4 mb-8 reveal">
+      <a href="#exec">📑 Executive Summary</a>
+      <a href="#problem">❓ Problem</a>
+      <a href="#arch">🏗️ Architecture</a>
+      <a href="#puri-index">📊 PURI Index</a>
+      <a href="#utility">🛠️ Utility</a>
+      <a href="#tokenomics">💰 Tokenomics</a>
+      <a href="#fees">💵 Fees</a>
+      <a href="#liquidity">💧 Liquidity</a>
+      <a href="#governance">🗳️ Governance</a>
+      <a href="#security">🛡️ Security</a>
+      <a href="#roadmap">🛣️ Roadmap</a>
+      <a href="#transparency">🔒 Transparency</a>
+      <a href="#conclusion">🚀 Conclusion</a>
+      <a href="#appendix">📎 Appendix</a>
+    </nav>
+
+    <!-- Sections -->
+    <section id="exec" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">📑 Executive Summary</h2>
+      <div class="card mt-8 body">
+        <p>$PURI launched on <b>pump.fun (Sep 10, 2025)</b> with <b>100% circulating supply</b>, no team allocation, and
+          no lock-ups.</p>
+        <p class="mt-8">Our vision: expand PURI into the <b>reserve currency</b> of the PURIX Unified Exchange, blending
+          CEX-grade user experience with DEX-grade transparency.</p>
+        <p class="mt-8">Just as the <b>US dollar became the backbone of international trade</b>, PURI is designed to be
+          the <b>common denominator of Web3</b>.</p>
+      </div>
+    </section>
+
+    <section id="problem" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">❓ Market Rationale & Problem</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>20,000+ tokens, fragmented liquidity → slippage & poor UX</li>
+          <li>CEX collapses (FTX, Celsius) showed custodial risk</li>
+          <li>No global crypto reserve standard → chaos in routing/liquidity</li>
+        </ul>
+        <p class="mt-8">👉 Solution: PURI as the <b>reserve currency layer</b>, routing trades, rewards, and missions to
+          concentrate liquidity.</p>
+      </div>
+    </section>
+
+    <section id="arch" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🏗️ Unified Exchange Architecture</h2>
+      <div class="card mt-8 body">
+        <p><b>CEX UX</b>: charts, orderbook, real-time depth, responsive UI</p>
+        <p class="mt-6"><b>DEX settlement</b>: assets always in wallets, swaps on-chain (Jupiter routing)</p>
+        <p class="mt-6"><b>Target</b>: &lt;2 sec confirmation, 50k concurrent users</p>
+        <p class="mt-6"><b>Transparency</b>: on-chain proof of reserves, monthly burn reports</p>
+      </div>
+    </section>
+
+    <section id="puri-index" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">📊 PURI Index Exchange Concept</h2>
+      <div class="card mt-8 body">
+        <p>
+          The <b>PURI Hyper Index</b> is a custom benchmark derived from global equity 
+          indicators such as the NASDAQ, transformed into a community-driven Web3 metric. 
+          Unlike traditional financial indices, the PURI Index is <b>calculated on-chain through 
+          decentralized oracles</b> and expressed in simplified units for easy understanding.
+        </p>
+        <p class="mt-8">
+          Within the <b>PURIX Unified Exchange</b>, the PURI Index powers prediction markets, 
+          gamified trading experiences, and experimental derivative-like structures — all while 
+          maintaining <b>non-custodial, wallet-first settlement</b>.
+        </p>
+        <ul class="list mt-8">
+          <li>🌐 Transparent oracle feeds with no hidden pricing</li>
+          <li>🎮 Gamified “Yes/No” markets based on PURI Index milestones</li>
+          <li>💱 Settlement supported in USDT, USDC, and $PURI</li>
+          <li>🛡️ Structured as a community-driven experiment rather than a traditional financial product</li>
+        </ul>
+        <p class="mt-8">
+          This Index Exchange concept reinforces PURI’s identity as both a 
+          <b>meme-born community currency</b> and a <b>serious experiment in decentralized market design</b>.
+        </p>
+      </div>
+    </section>
+
+    <section id="utility" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🛠️ $PURI Utility</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>Trading fee discounts (up to 50%)</li>
+          <li>Staking rewards + Launchpad access</li>
+          <li>Exchange profit buyback & burn</li>
+          <li>Reserve routing standard for major pairs</li>
+          <li>Earthling Missions → automated PURI rewards</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="tokenomics" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">💰 Tokenomics</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>Total Supply: 100% circulating, fixed</li>
+          <li>Team Allocation: none</li>
+          <li>Treasury Policy: maintain ≥1.5× monthly rewards</li>
+        </ul>
+        <p class="mt-8"><b>Revenue Allocation</b> (example: α=40% rewards, β=40% buybacks, γ=20% burns)</p>
+        <p class="mt-6">Deflationary flywheel: volume ↑ → buybacks ↑ → supply ↓ → value ↑</p>
+      </div>
+    </section>
+
+    <section id="fees" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">💵 Fees & Revenue</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>Base fee ~0.30% → 0.10% with PURI staking</li>
+          <li>Launchpad: fees → PURI conversion + burn</li>
+          <li>Referral income in PURI</li>
+          <li>Quarterly revenue/burn report on-chain</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="liquidity" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">💧 Liquidity & Market Ops</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>Initial pools: PURI/USDC, PURI/SOL</li>
+          <li>Expansion: BTC, ETH, top 20 tokens</li>
+          <li>Buybacks when weak demand; circuit-breakers in volatility</li>
+          <li>Target: 70% PURI volume routed via reserve pairs by 2026 Q2</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="governance" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🗳️ Governance</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>DAO planned 2026 → vote on fees/buyback ratios</li>
+          <li>Treasury multisig, visible signers, public changes</li>
+          <li>Snapshot voting, weight = staked PURI</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="security" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🛡️ Security & Risk</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>External audit before 2026 Q1 launch</li>
+          <li>Bug bounties for vulnerabilities</li>
+          <li>Regulatory disclosure (KYC/AML with on-ramps)</li>
+          <li>Failover infra for routing/indexers</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🛣️ Roadmap</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>2025 Q3: pump.fun launch, community growth</li>
+          <li>2025 Q4: staking/burn system, Mission S2, liquidity tests</li>
+          <li>2026 Q1: PURIX Beta, fee discounts live, Launchpad debut</li>
+          <li>2026 Q2: Global expansion, CEX/DEX partnerships</li>
+          <li>Target: 50k DAU, $10M daily volume, 10+ partners</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="transparency" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🔒 Transparency</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>100% circulation, no unlocks</li>
+          <li>Treasury reports published monthly</li>
+          <li>Non-custodial → assets stay in wallets</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="conclusion" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">🚀 Conclusion</h2>
+      <div class="card mt-8 body">
+        <p>PURI started as a meme — but it will <b>end as money</b>.</p>
+        <p class="mt-8">By concentrating liquidity, automating rewards, and linking exchange growth directly to token
+          value, PURI evolves into the <b>digital reserve currency of Web3</b>.</p>
+      </div>
+    </section>
+
+    <section id="appendix" class="section-gap reveal">
+      <div class="divider"></div>
+      <h2 class="chapter">📎 Appendix</h2>
+      <div class="card mt-8 body">
+        <ul class="list">
+          <li>PURI Mint: <code>TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM</code></li>
+          <li>Official domains/accounts: (to be announced)</li>
+          <li>Audit reports: planned 2026</li>
+          <li>Disclaimer: Informational only, not investment advice</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
